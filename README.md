@@ -30,3 +30,31 @@ cd JobTracker.API
 dotnet restore
 dotnet run
 ```
+The backend API will start running at https://localhost:7054 (or another port, check your output).
+
+### Frontend
+
+Make sure you have Node.js and npm installed. Then run:
+```bash
+cd jobtracker-frontend
+npm install
+npm start
+```
+This will start the React development server at http://localhost:3000.
+
+The React app fetches job data from the backend API, so make sure the backend is running first.
+
+### Future improvements
+Add authentication
+
+Improve UI with better design and more filters
+
+Add more CRUD operations for jobs
+
+Deploy to cloud services
+
+### Notes
+This is a learning project, so things may change as I improve the code.
+
+Feel free to open issues or contribute!
+Thanks for checking this out! 😊

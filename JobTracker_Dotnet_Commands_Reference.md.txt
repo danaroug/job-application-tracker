@@ -1,0 +1,141 @@
+# JobTracker API and Tests - Command Reference
+
+## 1. Create the API Project
+
+# Create a new ASP.NET Core Web API project targeting .NET 8.0
+```bash
+dotnet new webapi -o JobTracker.API 
+```
+# Change directory into the API project folder
+```bash
+cd JobTracker.API
+```
+
+## 2. Add Entity Framework Core Packages to API
+
+# Add EF Core base package
+```bash
+dotnet add package Microsoft.EntityFrameworkCore
+```
+
+# Add EF Core SQLite provider (or change to your DB provider)
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+```
+
+# Add EF Core Tools (for migrations)
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+```
+## 3. Create the Database Context and Models
+
+Manual code step: create JobContext.cs, Job.cs model
+
+## 4. Add EF Core Migration
+# Create initial migration based on your models and DbContext
+```bash
+dotnet ef migrations add InitialCreate
+```
+
+# Update the database to apply the migration (create DB)
+```bash
+dotnet ef database update
+```
+
+## 5. Create the Test Project
+# Go back to root folder
+```bash
+cd ..
+```
+
+# Create a new xUnit test project
+```bash
+dotnet new xunit -o JobTracker.Tests
+```
+
+## 6. Add Required NuGet Packages to Test Project
+```bash
+cd JobTracker.Tests
+```
+
+# xUnit core framework
+```bash
+dotnet add package xunit
+```
+
+# xUnit runner for Visual Studio integration
+```bash
+dotnet add package xunit.runner.visualstudio
+```
+
+# Moq mocking framework
+```bash
+dotnet add package Moq
+```
+# EF Core In-Memory provider (for testing without a real DB)
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+```
+
+# ASP.NET Core MVC Core package (for ActionResult etc.)
+```bash
+dotnet add package Microsoft.AspNetCore.Mvc.Core
+```
+
+## 7. Setup Solution and Link Projects
+
+# Go to solution folder (assuming JobTracker.API folder)
+```bash
+cd ..
+```bash
+
+# Create a new solution file (only if it doesn’t exist)
+```bash
+dotnet new sln -n JobTracker
+```
+
+# Add the API project to the solution
+```bash
+dotnet sln JobTracker.sln add JobTracker.API/JobTracker.API.csproj
+```
+
+# Add the Test project to the solution
+```bash
+dotnet sln JobTracker.sln add JobTracker.Tests/JobTracker.Tests.csproj
+```
+
+# Add reference from Tests to API (so tests can access API classes)
+```bash
+cd JobTracker.Tests
+dotnet add reference ../JobTracker.API/JobTracker.API.csproj
+```
+
+## 8. Build and Run Tests
+# From solution folder
+```bash
+cd ..
+```
+
+# Build the whole solution (all projects)
+```bash
+dotnet build
+```
+
+# Run tests in the test project(s)
+```bash
+dotnet test
+```
+
+## Notes
+Always run commands from the correct directory or specify paths properly.
+
+Use forward slashes / or Windows backslashes \ consistently for paths.
+
+Solution file (.sln) should be at a common root folder containing both projects.
+
+The Test project should reference the API project to access its classes.
+
+Use EF Core In-Memory provider in tests for faster isolated testing without a real database.
+
+
+
